@@ -147,13 +147,13 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         mapParams.put("deliveryStream", params.streamNumber.toString());
         mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
         var delivererlist = Utility.convertOne(
-                "http://localhost:8093/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
 
         var warehouselist: List<LogisticChannel>? = Utility.convertwo(
-                "http://localhost:8093/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
 
         var deliveryScheduleList = Utility.converthree(
-                "http://localhost:8093/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
 
         if(warehouselist!=null && delivererlist != null
                 //&& deliveryScheduleList != null
@@ -169,7 +169,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         } else {
             return null
         }
-        val url = "http://localhost:8095/api/v1/deliveryMoment-Crud-service/model"
+        val url = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model"
        val httpHeaders = HttpHeaders()
        httpHeaders.contentType = MediaType.APPLICATION_JSON
        val requestParams = LinkedMultiValueMap<String, String>()
@@ -225,13 +225,13 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
             mapParams.put("deliveryStream", params.streamNumber.toString());
             mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
             var delivererlist = Utility.convertOne(
-                    "http://localhost:8093/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
 
             var warehouselist: List<LogisticChannel>? = Utility.convertwo(
-                    "http://localhost:8093/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
 
             var deliveryScheduleList = Utility.converthree(
-                    "http://localhost:8093/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
 
             if(warehouselist!=null && delivererlist != null
             //&& deliveryScheduleList != null
@@ -247,7 +247,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
             } else {
                 return null
             }
-            val url = "http://localhost:8095/api/v1/deliveryMoment-Crud-service/model"
+            val url = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model"
             val httpHeaders = HttpHeaders()
             httpHeaders.contentType = MediaType.APPLICATION_JSON
             val requestParams = LinkedMultiValueMap<String, String>()
@@ -270,8 +270,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
 
     fun delForm(id:String) {
-//        val url = "http://delschcrud-edppublic-delschcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryschedule-crud-service/model/{id}"
-        val url = "http://localhost:8095/api/v1/deliveryMoment-Crud-service/model/{id}"
+        val url = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model/{id}"
         var parametermap:MutableMap<String, String> = mutableMapOf<String, String>()
 
         parametermap.put("id" ,id)

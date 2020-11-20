@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
     val logger = logger()
-    private val basePath = "http://localhost:8095/api/v1/deliveryMoment-Crud-service"
+    private val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model"
     override fun getdeliverymomentall(storeNumber: Long?, StreamNumber: Int?,
                                       schemaName: String?,deliveryDateTime:String?,orderDateTime:String?,
                                       fillDateTime:String?,
