@@ -17,7 +17,7 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService) {
 
     @Autowired
     lateinit var restTemplate: RestTemplate
-    private val basePath = "http://localhost:8095/api/v1/deliveryMoment-Crud-service"
+    private val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service"
     fun validationforUniqueMoments(params: DeliveryMomentModel): Boolean {
 
         println("result of unique thing")
@@ -147,13 +147,13 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         mapParams.put("deliveryStream", params.streamNumber.toString());
         mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
         var delivererlist = Utility.convertOne(
-                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryChannel", DeliveryChannel(), mapParams)
 
         var warehouselist: List<LogisticChannel>? = Utility.convertwo(
-                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/logisticChannel", LogisticChannel(), mapParams)
 
         var deliveryScheduleList = Utility.converthree(
-                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
+                "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
 
         if(warehouselist!=null && delivererlist != null
                 //&& deliveryScheduleList != null
@@ -225,13 +225,13 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
             mapParams.put("deliveryStream", params.streamNumber.toString());
             mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
             var delivererlist = Utility.convertOne(
-                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryChannel", DeliveryChannel(), mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryChannel", DeliveryChannel(), mapParams)
 
             var warehouselist: List<LogisticChannel>? = Utility.convertwo(
-                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/logisticChannel", LogisticChannel(), mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/logisticChannel", LogisticChannel(), mapParams)
 
             var deliveryScheduleList = Utility.converthree(
-                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/service-template/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
+                    "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
 
             if(warehouselist!=null && delivererlist != null
             //&& deliveryScheduleList != null

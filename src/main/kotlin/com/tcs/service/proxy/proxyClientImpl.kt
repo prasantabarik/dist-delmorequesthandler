@@ -65,7 +65,7 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
         }
 
 
-        return Utility.convert("$basePath/model", DeliveryMomentModel(), mapParams)
+        return Utility.convert("$basePath", DeliveryMomentModel(), mapParams)
     }
     companion object {
 
