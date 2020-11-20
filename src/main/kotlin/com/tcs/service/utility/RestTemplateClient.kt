@@ -50,7 +50,7 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService) {
             var timeComp1 = dateList1[1].format(DateTimeFormatter.ISO_TIME)
             var timeComp2 = dateList2[1].format(DateTimeFormatter.ISO_TIME)
 
-            return (timeComp1 >= timeComp2)
+            return (timeComp1 <= timeComp2)
             println("result of date check validation")
 
         } else {
@@ -123,7 +123,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
     println("inside order")
     println(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString()))
     println("inside delivery")
-    println(checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString()))
+    println(checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString()))
     println("inside startfill")
     println(checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString()))
     println("inside order")
@@ -134,12 +134,14 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
 
     if(validationforUniqueMoments(params) && checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
-            && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
+            && checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString())
             && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
-            && checkDateTime(params.startFillTime.toString(),params.orderDateTime.toString())
+            && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
             )  {
+        println("VALIDATION 1")
 
         if(params.mainDeliveryFlag == "J" && maindeliveryflagcheck(params) == false) {
+            println("VALIDATION 2")
             return null
         }
 
@@ -155,7 +157,12 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
         var deliveryScheduleList = Utility.converthree(
                 "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
-
+        println("warehouse")
+        println(warehouselist)
+        println("deliverer")
+        println(delivererlist)
+        println("deliveryScheduleList")
+        println(deliveryScheduleList)
         if(warehouselist!=null && delivererlist != null
                 && deliveryScheduleList != null
                  ) {

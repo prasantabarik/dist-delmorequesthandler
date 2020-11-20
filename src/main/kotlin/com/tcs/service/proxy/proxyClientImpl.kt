@@ -20,15 +20,15 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
                                       startFillTime:String?, deliveryDateFrom:String?, deliveryDateTo:String?,
                                       orderDateFrom:String?, orderDateTo:String?, fillDateFrom:String?,
                                       fillDateTo:String?, startFillTimeFrom:String?, startFillTimeTo:String?,
-                                      logisticGroupNumber:Int?)
+                                      logisticGroupNumber:Int?, mainDeliveryFlag: String?)
             : List<DeliveryMomentModel>? {
         var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
 
         if(storeNumber == null && StreamNumber == null &&
-                schemaName == null && deliveryDateTime == null
-                && orderDateTime == null && fillDateTime == null
-                && logisticGroupNumber== null
-                && startFillTime == null){
+                schemaName == null && deliveryDateTime == null && deliveryDateFrom == null && deliveryDateTo == null
+                && startFillTime == null && startFillTimeFrom == null && startFillTimeTo == null && orderDateTime == null && orderDateFrom == null && orderDateTo == null
+                && logisticGroupNumber== null && fillDateTime == null && fillDateFrom == null && fillDateTo == null
+                && mainDeliveryFlag == null){
             return Utility.convert("$basePath/model", DeliveryMomentModel(), mapParams)
         }
 
@@ -48,23 +48,50 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
         if( deliveryDateTime != null) {
             mapParams.put("deliveryDateTime", deliveryDateTime);
         }
+        if( deliveryDateFrom != null) {
+            mapParams.put("deliveryDateFrom", deliveryDateFrom);
+        }
+        if( deliveryDateTo != null) {
+            mapParams.put("deliveryDateTo", deliveryDateTo);
+        }
 
         if( orderDateTime != null) {
             mapParams.put("orderDateTime", orderDateTime);
+        }
+        if( orderDateFrom != null) {
+            mapParams.put("orderDateFrom", orderDateFrom);
+        }
+        if( orderDateTo != null) {
+            mapParams.put("orderDateTo", orderDateTo);
         }
 
         if( fillDateTime != null) {
             mapParams.put("fillDateTime", fillDateTime);
         }
+        if( fillDateFrom != null) {
+            mapParams.put("fillDateFrom", fillDateFrom);
+        }
+        if( fillDateTo != null) {
+            mapParams.put("fillDateTo", fillDateTo);
+        }
 
         if( startFillTime != null) {
                 mapParams.put("startFillTime", startFillTime);
         }
+        if( startFillTimeFrom != null) {
+            mapParams.put("startFillTimeFrom", startFillTimeFrom);
+        }
+        if( startFillTimeTo != null) {
+            mapParams.put("startFillTimeTo", startFillTimeTo);
+        }
         if(logisticGroupNumber != null){
             mapParams.put("logisticGroupNumber", logisticGroupNumber.toString());
         }
-
-
+        if(mainDeliveryFlag != null){
+            mapParams.put("mainDeliveryFlag", mainDeliveryFlag.toString());
+        }
+        println("MAP PARAMS")
+        println(mapParams)
         return Utility.convert("$basePath/model", DeliveryMomentModel(), mapParams)
     }
     companion object {

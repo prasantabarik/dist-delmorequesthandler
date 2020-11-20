@@ -79,17 +79,18 @@ class Controller(private val service: Service, private val momentservice: Delive
             @RequestParam(required = false) fillDateTo:String?,
             @RequestParam(required = false) startFillTimeFrom:String?,
             @RequestParam(required = false) startFillTimeTo:String?,
-            @RequestParam(required = false) logisticGroupNumber:Int?): ResponseEntity<ServiceResponse> {
+            @RequestParam(required = false) logisticGroupNumber:Int?,
+            @RequestParam(required = false) mainDeliveryFlag:String?): ResponseEntity<ServiceResponse> {
         logger.info("Get All")
         var records = mutableListOf<Any>()
 //        customService.getdeliveryscheduleall()?.toMutableList()
         return ResponseEntity.ok(ServiceResponse("200",
                 "SUCCESS", momentservice.getdeliverymomentall(storeNumber, streamNumber,
-                                                           schemaName,deliveryDateFrom, deliveryDateTo,
-                                                              orderDateFrom, orderDateTo, fillDateFrom,
-                                                          fillDateTo, startFillTimeFrom, startFillTimeTo,
-                                                            deliveryDateTime, orderDateTime,
-                                                            fillDateTime, startFillTime,logisticGroupNumber)))
+                                                           schemaName,deliveryDateTime, orderDateTime,
+                fillDateTime, startFillTime, deliveryDateFrom,
+                deliveryDateTo, orderDateFrom, orderDateTo,
+                fillDateFrom, fillDateTo,
+                startFillTimeFrom, startFillTimeTo,logisticGroupNumber, mainDeliveryFlag)))
     }
 
     /**

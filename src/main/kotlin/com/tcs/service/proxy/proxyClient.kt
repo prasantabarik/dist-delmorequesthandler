@@ -6,5 +6,5 @@ interface DeliveryMoment<T> {
                              fillDateTime:String?, startFillTime:String?, deliveryDateFrom:String?, deliveryDateTo:String?,
                              orderDateFrom:String?, orderDateTo:String?, fillDateFrom:String?,
                              fillDateTo:String?, startFillTimeFrom:String?, startFillTimeTo:String?,
-                             logisticGroupNumber:Int?):Any?
+                             logisticGroupNumber:Int?, mainDeliveryFlag: String?):Any?
 }
