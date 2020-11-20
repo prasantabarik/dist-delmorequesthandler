@@ -1,0 +1,19 @@
+name: delmoreqhandler
+namespace: ""
+cdPipelineName: ""
+cdPipelineStageName: ""
+dnsWildcard: 59ae6b648ca3437aae3a.westeurope.aksapp.io
+framework: java11
+
+database:
+  required: false
+
+
+ingress:
+  required: true
+  site: delmoreqhandler
+  path: /api/v1/deliverymomenthandler
+
+image:
+  name: delmoreqhandler
+  version: latest
