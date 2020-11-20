@@ -63,3 +63,13 @@
 [INFO ] 2020-11-20 10:30:43.876 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
 [INFO ] 2020-11-20 10:30:54.221 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 12.028 seconds (JVM running for 16.425)
 [INFO ] 2020-11-20 10:32:10.607 [http-nio-8097-exec-3] Controller - Get All
+[INFO ] 2020-11-20 16:56:35.436 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on LAPTOP-QIN81B4G with PID 22828 (C:\Users\RaghavG2213\Downloads\DeliveryMomentRequestHandler\target\classes started by RaghavG2213 in C:\Users\RaghavG2213\Downloads\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-20 16:56:35.467 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-20 16:56:42.252 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 7.825 seconds (JVM running for 11.449)
+[INFO ] 2020-11-20 18:12:05.212 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on LAPTOP-QIN81B4G with PID 20320 (C:\Users\RaghavG2213\Downloads\DeliveryMomentRequestHandler\target\classes started by RaghavG2213 in C:\Users\RaghavG2213\Downloads\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-20 18:12:05.245 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-20 18:12:16.163 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 11.706 seconds (JVM running for 15.514)
+[INFO ] 2020-11-20 18:12:46.132 [http-nio-8080-exec-3] Controller - Get All
+[ERROR] 2020-11-20 18:12:47.046 [http-nio-8080-exec-3] ExceptionHandlers - [Ljava.lang.StackTraceElement;@5c26564b
+[INFO ] 2020-11-20 18:13:25.889 [http-nio-8080-exec-5] Controller - Get All
+[ERROR] 2020-11-20 18:13:26.218 [http-nio-8080-exec-5] ExceptionHandlers - [Ljava.lang.StackTraceElement;@5927c58a
