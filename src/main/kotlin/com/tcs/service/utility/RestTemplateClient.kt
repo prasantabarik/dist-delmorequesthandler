@@ -156,16 +156,17 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
                 "http://getrefdata-edppublic-getrefdata-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/getReferenceData/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
 
         if(warehouselist!=null && delivererlist != null
-                //&& deliveryScheduleList != null
+                && deliveryScheduleList != null
                  ) {
             println("nullchecklist")
             params.delivererNumber = delivererlist[0].delivererNumber
-           // params.deliverySchemaType = deliveryScheduleList[0].deliverySchemaType
+            params.deliverySchemaType = deliveryScheduleList[0].deliverySchemaType
 
             params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
 
             ///need to check to generate sequence
-            params.storeOrder?.add(StoreOrder(orderNumber = 12355,wareHouseNumber = warehouselist?.get(0)?.warehouseNumber))
+            
+            params.storeOrder?.add(StoreOrder(orderNumber = Random.nextLong(100000) ,wareHouseNumber = warehouselist?.get(0)?.warehouseNumber))
         } else {
             return null
         }
@@ -243,7 +244,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
                 params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
 
                 ///need to check to generate sequence
-                params.storeOrder?.add(StoreOrder(orderNumber = 12355,wareHouseNumber = warehouselist?.get(0)?.warehouseNumber))
+               // params.storeOrder?.add(StoreOrder(orderNumber = 12355,wareHouseNumber = warehouselist?.get(0)?.warehouseNumber))
             } else {
                 return null
             }
