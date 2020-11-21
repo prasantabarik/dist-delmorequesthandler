@@ -44,7 +44,6 @@ object Utility {
         println(jsonObject)
         return when {
             jsonObject != null -> {
-          //      println("Hi")
                 val mapper = ObjectMapper().registerKotlinModule()
                 mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
                 println(objectType)
