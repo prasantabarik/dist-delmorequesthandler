@@ -125,7 +125,7 @@ class Controller(private val service: Service, private val momentservice: Delive
         val  response= postService.postForm(model)
         if (response == null) {
             return ResponseEntity.ok(ServiceResponse("400",
-                    "Failure", "Data Not Valid"))
+                    "Failure", "Something went wrong in inserting Delivery Moment"))
         }
         else {
             return ResponseEntity.ok(ServiceResponse("200",
@@ -146,7 +146,7 @@ class Controller(private val service: Service, private val momentservice: Delive
         val  response = postService.putForm(model)
         if (response == null) {
             return ResponseEntity.ok(ServiceResponse("400",
-                    "Failure", "Data Not Valid"))
+                    "Failure", "Something went wrong in updating Delivery Moment"))
         }
         else {
             return ResponseEntity.ok(ServiceResponse("200",

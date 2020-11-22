@@ -105,7 +105,7 @@ object Utility {
                 println(objectType)
                 when (objectType) {
 //
-                    is LogisticChannel -> {
+                    is DeliveryScheduleModel -> {
                   //      println("Hello again")
 //                      mapper.readValue<StoreCluster>(jsonObject["response"].toString(), StoreCluster::class.java)
                         mapper.readValue(jsonObject["response"].toString(), Array<DeliveryScheduleModel>::class.java).toMutableList()
