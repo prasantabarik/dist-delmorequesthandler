@@ -16,6 +16,7 @@ object Utility {
 
         val jsonObject = get(url = url, params = params).jsonObject
         println(jsonObject)
+
         return when {
             jsonObject != null -> {
                 val mapper = ObjectMapper().registerKotlinModule()

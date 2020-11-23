@@ -9,6 +9,7 @@ import org.springframework.http.*
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.client.RestTemplate
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
@@ -28,10 +29,18 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService) {
         mapParams.put("streamNumber", params.streamNumber.toString());
         mapParams.put("deliveryDateTime", params.deliveryDateTime.toString());
         mapParams.put("orderDateTime", params.orderDateTime.toString());
-        mapParams.put("fillDateTime", params.fillDateTime.toString());
+        mapParams.put("fillDateTime", params.fillDateTime.toString())
         var uniqueCheckList :List<DeliveryMomentModel>? =  Utility.convert("$basePath/deliverymomentunique", DeliveryMomentModel(), mapParams)
          println(uniqueCheckList.isNullOrEmpty())
-        return uniqueCheckList.isNullOrEmpty()
+
+        // checking if isdeleted flag is true
+        if(!uniqueCheckList.isNullOrEmpty() && uniqueCheckList?.get(0)?.isdeleted == true) {
+
+            return true
+
+        } else {
+            return uniqueCheckList.isNullOrEmpty()
+        }
 
 
 
@@ -62,6 +71,8 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService) {
         mapParams.put("storeNumber", params.storeNumber.toString());
         mapParams.put("streamNumber", params.streamNumber.toString());
         mapParams.put("deliveryDateFrom", params.deliveryDateTime.toString().split(" ")[0])
+        mapParams.put("deliveryDateTo", LocalDate.parse(params.deliveryDateTime.toString().split(" ")[0], DateTimeFormatter.ISO_DATE).plusDays(1).toString())
+
         mapParams.put("mainDeliveryFlag", "J")
         var uniqueCheckList :List<DeliveryMomentModel>? =  Utility.convert("$basePath/model", DeliveryMomentModel(), mapParams)
         println("result of main delivery validation")
@@ -173,7 +184,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
             params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
 
             ///need to check to generate sequence
-            
+
             params.storeOrder?.add(StoreOrder(orderNumber = Random.nextLong(100000) ,wareHouseNumber = warehouselist?.get(0)?.warehouseNumber))
         } else {
             return null
@@ -187,7 +198,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
        val httpEntity = HttpEntity<DeliveryMomentModel>(params, httpHeaders)
 //      // return restTemplate.postForObject(url, httpEntity, ResponseEntity<T>::class.java)
 //       // var serv: ResponseEntity<ServiceResponse>? = null
-
+        println("it comes to hit crud")
         val response: ResponseEntity<ServiceResponse> = restTemplate.exchange(url, HttpMethod.POST, httpEntity, ServiceResponse::class.java)
 
 //     //    serv = restTemplate.postForObject(url, httpEntity, ServiceResponse::class.java)
@@ -219,16 +230,22 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
 
 
+//        if(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
+//                && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
+//                && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
+//                && checkDateTime(params.startFillTime.toString(),params.orderDateTime.toString())
+//        )
         if(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
-                && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
+                && checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString())
                 && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
-                && checkDateTime(params.startFillTime.toString(),params.orderDateTime.toString())
-        )  {
+                && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
+        )
+        {
 
 //            if(params.mainDeliveryFlag == "J" && maindeliveryflagcheck(params) == false) {
 //                return null
 //            }
-
+             println("It is trying to update")
             var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
             mapParams.put("storeNumber", params.storeNumber.toString());
             mapParams.put("deliveryStream", params.streamNumber.toString());
