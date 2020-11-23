@@ -145,7 +145,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
 
     if(validationforUniqueMoments(params) && checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
-            && checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString())
+            && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
             && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
             && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
             )  {
@@ -236,7 +236,7 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 //                && checkDateTime(params.startFillTime.toString(),params.orderDateTime.toString())
 //        )
         if(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
-                && checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString())
+                && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
                 && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
                 && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
         )

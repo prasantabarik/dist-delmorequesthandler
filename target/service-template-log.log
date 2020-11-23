@@ -60,3 +60,18 @@
 [INFO ] 2020-11-23 11:47:03.076 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on DESKTOP-ATSEQH3 with PID 21744 (F:\DeliveryMomentRequestHandler\target\classes started by kprab in F:\DeliveryMomentRequestHandler)
 [INFO ] 2020-11-23 11:47:03.109 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
 [INFO ] 2020-11-23 11:47:19.635 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 17.434 seconds (JVM running for 21.662)
+[INFO ] 2020-11-23 11:51:38.604 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on DESKTOP-ATSEQH3 with PID 10212 (F:\DeliveryMomentRequestHandler\target\classes started by kprab in F:\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-23 11:51:38.639 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-23 11:51:45.564 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 7.906 seconds (JVM running for 10.743)
+[INFO ] 2020-11-23 14:13:00.145 [http-nio-8091-exec-5] Controller - Get All
+[INFO ] 2020-11-23 14:15:05.739 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on DESKTOP-ATSEQH3 with PID 10744 (F:\DeliveryMomentRequestHandler\target\classes started by kprab in F:\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-23 14:15:05.783 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-23 14:15:22.261 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 17.785 seconds (JVM running for 22.72)
+[INFO ] 2020-11-23 14:15:40.960 [http-nio-8091-exec-1] Controller - Get All
+[ERROR] 2020-11-23 14:16:00.661 [http-nio-8091-exec-3] ExceptionHandlers - [Ljava.lang.StackTraceElement;@76885ed0
+[INFO ] 2020-11-23 20:38:17.501 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on DESKTOP-ATSEQH3 with PID 19228 (F:\DeliveryMomentRequestHandler\target\classes started by kprab in F:\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-23 20:38:17.637 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-23 20:38:33.986 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 18.672 seconds (JVM running for 28.386)
+[INFO ] 2020-11-23 20:46:02.819 [main] ServiceKotlinTemplateApplicationKt - Starting ServiceKotlinTemplateApplicationKt on DESKTOP-ATSEQH3 with PID 17016 (F:\DeliveryMomentRequestHandler\target\classes started by kprab in F:\DeliveryMomentRequestHandler)
+[INFO ] 2020-11-23 20:46:02.874 [main] ServiceKotlinTemplateApplicationKt - No active profile set, falling back to default profiles: default
+[INFO ] 2020-11-23 20:46:09.699 [main] ServiceKotlinTemplateApplicationKt - Started ServiceKotlinTemplateApplicationKt in 7.809 seconds (JVM running for 10.853)
