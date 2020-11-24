@@ -15,6 +15,10 @@ spec:
         metadata:
             labels:
                 app: {{ .Values.name }}
+            annotations:
+                dapr.io/app-id: delmoreqhandler
+                dapr.io/app-port: "8080"
+                dapr.io/enabled: "true"
         spec:
 {{- if .Values.database.required }}
             initContainers:
