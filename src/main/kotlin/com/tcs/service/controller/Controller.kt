@@ -1,6 +1,6 @@
 package com.tcs.service.controller
 
-import com.microsoft.applicationinsights.TelemetryClient
+
 import com.tcs.service.constant.ExceptionMessage.BAD_REQUEST
 import com.tcs.service.constant.ExceptionMessage.NO_DATA_FOUND
 import com.tcs.service.constant.ServiceLabels.API_TAG_DESC
@@ -49,8 +49,8 @@ class Controller(private val service: Service, private val momentservice: Delive
     /**
      * TelemetryClient is responsible for sending events to App Insights
      */
-    @Autowired
-    lateinit var telemetryClient: TelemetryClient
+//    @Autowired
+//    lateinit var telemetryClient: TelemetryClient
 
     /**
      * This is a sample of the GET Endpoint
@@ -83,7 +83,7 @@ class Controller(private val service: Service, private val momentservice: Delive
             @RequestParam(required = false) mainDeliveryFlag:String?): ResponseEntity<ServiceResponse> {
         logger.info("Get All")
         var records = mutableListOf<Any>()
-//        customService.getdeliveryscheduleall()?.toMutableList()
+
         return ResponseEntity.ok(ServiceResponse("200",
                 "SUCCESS", momentservice.getdeliverymomentall(storeNumber, streamNumber,
                                                            schemaName,deliveryDateTime, orderDateTime,
@@ -123,12 +123,12 @@ class Controller(private val service: Service, private val momentservice: Delive
     @RequestMapping(value = [POST_PUT_DELETE_URI], method = [RequestMethod.POST], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun post(@RequestBody model: DeliveryMomentModel): ResponseEntity<ServiceResponse> {
         val  response= postService.postForm(model)
-        if (response == null) {
-            return ResponseEntity.ok(ServiceResponse("400",
+        return if (response == null) {
+            ResponseEntity.ok(ServiceResponse("400",
                     "Failure", "Something went wrong in inserting Delivery Moment"))
         }
         else {
-            return ResponseEntity.ok(ServiceResponse("200",
+            ResponseEntity.ok(ServiceResponse("200",
                     "SUCCESS", "Data Successfully Inserted"))
         }
     }
@@ -144,12 +144,12 @@ class Controller(private val service: Service, private val momentservice: Delive
     @RequestMapping(value = [POST_PUT_DELETE_URI], method = [RequestMethod.PUT], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun put(@RequestBody model: DeliveryMomentModel): ResponseEntity<ServiceResponse> {
         val  response = postService.putForm(model)
-        if (response == null) {
-            return ResponseEntity.ok(ServiceResponse("400",
+        return if (response == null) {
+            ResponseEntity.ok(ServiceResponse("400",
                     "Failure", "Something went wrong in updating Delivery Moment"))
         }
         else {
-            return ResponseEntity.ok(ServiceResponse("200",
+            ResponseEntity.ok(ServiceResponse("200",
                     "SUCCESS", "Data Successfully Updated"))
         }
     }

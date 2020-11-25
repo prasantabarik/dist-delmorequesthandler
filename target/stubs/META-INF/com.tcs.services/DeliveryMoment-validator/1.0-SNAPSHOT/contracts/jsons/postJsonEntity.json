@@ -1,0 +1,37 @@
+{
+  "id": "70012020-11-211",
+  "storeNumber": 7001,
+  "streamNumber": 1,
+  "deliveryStreamName": "HOUDBAAR",
+  "schemaName": "BASISSCHEMA",
+  "deliveryDateTime": "2020-12-02 16:30:00",
+  "orderDateTime": "2020-12-01 23:00:00",
+  "initialPromotionFlag": "N",
+  "orderStatus": null,
+  "totalInitialOrderQuantity": null,
+  "totalOrderQuantity": null,
+  "boxSize": 90010,
+  "fillDateTime": "2020-12-02 16:30:00",
+  "mainDeliveryFlag": "J",
+  "storeAdviseFlag": "N",
+  "deliverySchemaType": null,
+  "delivererNumber": 2,
+  "startFillTime": "2020-12-02 16:00:00",
+  "storeOrder": [
+    {
+      "orderNumber": 5236346,
+      "warehouseNumber": 1
+    }
+  ],
+  "logisticGroupExclusion": [
+    {
+      "logisticGroupNumber": 123
+    }
+  ],
+  "createdBy": "raghavForTest",
+  "creationDateTime": "2020-11-04 13:05:27",
+  "updatedBy": "pnl0060s",
+  "updateDateTime": "2020-11-04 13:05:27",
+  "isdeleted": false
+}
+

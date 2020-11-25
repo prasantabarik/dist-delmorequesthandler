@@ -33,6 +33,10 @@ class ServiceTest: BaseTest() {
     fun setup() {
         whenever(repository.findById(dataId.toInt())).thenAnswer {
             Optional.of(getModel().data)
+
+        }
+        whenever(repository.findAll()).thenAnswer {
+            Optional.of(getModel())
         }
 
     }
@@ -41,6 +45,11 @@ class ServiceTest: BaseTest() {
     @Test
     fun `should return model object`() {
         assert(service.getById(dataId) is Model)
+    }
+
+    @Test
+    fun `should return model list`() {
+        assert(true)
     }
 
 

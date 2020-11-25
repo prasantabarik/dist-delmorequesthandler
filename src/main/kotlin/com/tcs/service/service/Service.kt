@@ -26,14 +26,14 @@ class Service(private val repository: Repository) {
         return models
     }
 
-    fun save(model: Model)
-    {
-        repository.save(model.data)
-    }
-
-    fun delete(id: String)
-    {
-        repository.delete(repository.findById(id.toInt()).get())
-    }
+//    fun save(model: Model)
+//    {
+//        repository.save(model.data)
+//    }
+//
+//    fun delete(id: String)
+//    {
+//        repository.delete(repository.findById(id.toInt()).get())
+//    }
 
 }

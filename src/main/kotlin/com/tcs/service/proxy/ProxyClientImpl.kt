@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.query.isEqualTo
 @Service
 class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
     val logger = logger()
-   // private val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service"
+//    private val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service"
      private val basePath = "http://localhost:3500/v1.0/invoke/deliverymomentcrud.edppublic-deliverymomentcrud-dev/method/api/v1/deliveryMoment-Crud-service"
     override fun getdeliverymomentall(storeNumber: Long?, StreamNumber: Int?,
                                       schemaName: String?,deliveryDateTime:String?,orderDateTime:String?,
