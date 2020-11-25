@@ -19,6 +19,7 @@ spec:
                 dapr.io/app-id: delmoreqhandler
                 dapr.io/app-port: "8080"
                 dapr.io/enabled: "true"
+                dapr.io/config: appconfig
         spec:
 {{- if .Values.database.required }}
             initContainers:
