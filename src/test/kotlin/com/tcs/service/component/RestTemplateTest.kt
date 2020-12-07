@@ -49,8 +49,8 @@ class RestTemplateTest {
     fun setup() {
         whenever( utility.convert(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
         whenever( utility.convertOne(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
-        whenever( utility.convertwo(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
-        whenever( utility.converthree(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
+        whenever( utility.convertTwo(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
+        whenever( utility.convertThree(url = "", objectType = DeliveryMomentModel(), params = mutableMapOf())).thenAnswer { getModel() }
 
 //        whenever(postService.postForm(model)).thenAnswer { getModel() }
 //        whenever(service.getById(id = dataId)).thenAnswer { getModel() }
@@ -74,7 +74,7 @@ class RestTemplateTest {
 
     @Test
     fun `validationForUniqueMoments`() {
-        assert(restTemplateClient.validationforUniqueMoments(DeliveryMomentModel()) is Boolean)
+        assert(restTemplateClient.validationForUniqueMoments(DeliveryMomentModel()) is Boolean)
     }
 
     @Test
@@ -84,7 +84,7 @@ class RestTemplateTest {
 
     @Test
     fun `mainDeliveryFlagCheck`() {
-        assert(restTemplateClient.maindeliveryflagcheck(DeliveryMomentModel()) is Boolean)
+        assert(restTemplateClient.mainDeliveryFlagChecks(DeliveryMomentModel()) is Boolean)
     }
 
     @Test

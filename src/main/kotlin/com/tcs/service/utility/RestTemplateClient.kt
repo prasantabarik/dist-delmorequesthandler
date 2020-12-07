@@ -82,7 +82,7 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService, pri
         mapParams.put("mainDeliveryFlag", "J")
         var uniqueCheckList :List<DeliveryMomentModel>? =  Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
         println("result of main delivery validation")
-         return   uniqueCheckList.isNullOrEmpty()
+        return   uniqueCheckList.isNullOrEmpty()
     }
 
 

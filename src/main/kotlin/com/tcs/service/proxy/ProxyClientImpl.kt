@@ -20,30 +20,25 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
 //    val logger = logger()
 //    private val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service"
 //     private val basePath = "http://localhost:3500/v1.0/invoke/deliverymomentcrud.edppublic-deliverymomentcrud-dev/method/api/v1/deliveryMoment-Crud-service"
-    override fun getDeliveryMomentAll(storeNumber: Long?, StreamNumber: Int?,
-                                      schemaName: String?,deliveryDateTime:String?,orderDateTime:String?,
-                                      fillDateTime:String?,
-                                      startFillTime:String?, deliveryDateFrom:String?, deliveryDateTo:String?,
-                                      orderDateFrom:String?, orderDateTo:String?, fillDateFrom:String?,
-                                      fillDateTo:String?, startFillTimeFrom:String?, startFillTimeTo:String?,
-                                      logisticGroupNumber:Int?, mainDeliveryFlag: String?)
-            : List<DeliveryMomentModel>? {
+
+    override fun validateForParams(storeNumber: Long?, streamNumber: Int?, schemaName: String?, deliveryDateTime: String?, orderDateTime: String?, fillDateTime: String?, startFillTime: String?, deliveryDateFrom: String?, deliveryDateTo: String?, orderDateFrom: String?, orderDateTo: String?, fillDateFrom: String?, fillDateTo: String?, startFillTimeFrom: String?, startFillTimeTo: String?, logisticGroupNumber: Int?, mainDeliveryFlag: String?): MutableMap<String, String> {
         var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
 
-        if(storeNumber == null && StreamNumber == null &&
+
+        if(storeNumber == null && streamNumber == null &&
                 schemaName == null && deliveryDateTime == null && deliveryDateFrom == null && deliveryDateTo == null
                 && startFillTime == null && startFillTimeFrom == null && startFillTimeTo == null && orderDateTime == null && orderDateFrom == null && orderDateTo == null
                 && logisticGroupNumber== null && fillDateTime == null && fillDateFrom == null && fillDateTo == null
                 && mainDeliveryFlag == null){
-            return Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
+            println("Inside IF")
+            return mapParams
         }
-
         if( storeNumber != null) {
             mapParams.put("storeNumber", storeNumber.toString());
         }
 
-        if( StreamNumber != null) {
-            mapParams.put("streamNumber", StreamNumber.toString());
+        if( streamNumber != null) {
+            mapParams.put("streamNumber", streamNumber.toString());
         }
 
         if( schemaName != null) {
@@ -80,7 +75,7 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
         }
 
         if( startFillTime != null) {
-                mapParams.put("startFillTime", startFillTime);
+            mapParams.put("startFillTime", startFillTime);
         }
         if( startFillTimeFrom != null) {
             mapParams.put("startFillTimeFrom", startFillTimeFrom);
@@ -94,8 +89,36 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
         if(mainDeliveryFlag != null){
             mapParams.put("mainDeliveryFlag", mainDeliveryFlag.toString());
         }
-        println("MAP PARAMS")
-        println(mapParams)
+        return mapParams
+    }
+
+
+    override fun getDeliveryMomentAll(storeNumber: Long?, streamNumber: Int?,
+                                      schemaName: String?,deliveryDateTime:String?,orderDateTime:String?,
+                                      fillDateTime:String?,
+                                      startFillTime:String?, deliveryDateFrom:String?, deliveryDateTo:String?,
+                                      orderDateFrom:String?, orderDateTo:String?, fillDateFrom:String?,
+                                      fillDateTo:String?, startFillTimeFrom:String?, startFillTimeTo:String?,
+                                      logisticGroupNumber:Int?, mainDeliveryFlag: String?)
+            : List<DeliveryMomentModel>? {
+        var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
+
+//        if(storeNumber == null && StreamNumber == null &&
+//                schemaName == null && deliveryDateTime == null && deliveryDateFrom == null && deliveryDateTo == null
+//                && startFillTime == null && startFillTimeFrom == null && startFillTimeTo == null && orderDateTime == null && orderDateFrom == null && orderDateTo == null
+//                && logisticGroupNumber== null && fillDateTime == null && fillDateFrom == null && fillDateTo == null
+//                && mainDeliveryFlag == null){
+//            println("Inside IF")
+//            return Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
+//        }
+//
+          mapParams = validateForParams(storeNumber, streamNumber,
+                  schemaName,deliveryDateTime, orderDateTime,
+                  fillDateTime, startFillTime, deliveryDateFrom,
+                  deliveryDateTo, orderDateFrom, orderDateTo,
+                  fillDateFrom, fillDateTo,
+                  startFillTimeFrom, startFillTimeTo,logisticGroupNumber, mainDeliveryFlag)
+
         return Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
     }
 //    companion object {

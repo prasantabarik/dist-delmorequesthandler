@@ -96,20 +96,20 @@ class Controller(private val service: Service, private val proxyService: Deliver
     /**
      * This is a sample of the GET Endpoint
      */
-    @Operation(summary = OPENAPI_GET_BY_ID_DEF, description = OPENAPI_GET_BY_ID_DEF, tags = [API_TAG_NAME])
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = DATA_FOUND, content = [Content(schema = Schema(implementation = ServiceResponse::class))]),
-        ApiResponse(responseCode = "400", description = BAD_REQUEST, content = [Content()]),
-        ApiResponse(responseCode = "404", description = NO_DATA_FOUND, content = [Content()])]
-    )
-    @RequestMapping(value = [GET_BY_ID_URI], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getById(
-            @PathVariable id: String
-    ): ResponseEntity<ServiceResponse> {
-        logger.info("Get by id: ")
-        return ResponseEntity.ok(ServiceResponse("200",
-                "SUCCESS", service.getById(id).data))
-    }
+//    @Operation(summary = OPENAPI_GET_BY_ID_DEF, description = OPENAPI_GET_BY_ID_DEF, tags = [API_TAG_NAME])
+//    @ApiResponses(value = [
+//        ApiResponse(responseCode = "200", description = DATA_FOUND, content = [Content(schema = Schema(implementation = ServiceResponse::class))]),
+//        ApiResponse(responseCode = "400", description = BAD_REQUEST, content = [Content()]),
+//        ApiResponse(responseCode = "404", description = NO_DATA_FOUND, content = [Content()])]
+//    )
+//    @RequestMapping(value = [GET_BY_ID_URI], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
+//    fun getById(
+//            @PathVariable id: String
+//    ): ResponseEntity<ServiceResponse> {
+//        logger.info("Get by id: ")
+//        return ResponseEntity.ok(ServiceResponse("200",
+//                "SUCCESS", service.getById(id).data))
+//    }
 
     /**
      * This is a sample of the POST Endpoint
@@ -164,7 +164,6 @@ class Controller(private val service: Service, private val proxyService: Deliver
     )
     @RequestMapping(value = [GET_BY_ID_URI], method = [RequestMethod.DELETE], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun delete(@PathVariable id: String): ResponseEntity<ServiceResponse> {
-//        service.delete(id)
         println("Call Function")
         restService.delForm(id)
         println("Out of function")
