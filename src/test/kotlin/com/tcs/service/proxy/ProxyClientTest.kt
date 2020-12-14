@@ -74,7 +74,7 @@ class ProxyClientTest {
 
     @Test
     fun getDeliveryMomentAllTest(){
-//      var expected = File(URLPath.ENTITY_RESPONSE_JSON_PATH).readText(Charsets.UTF_8)
+
         var expected  = "[DeliveryMomentModel(id=70052020-11-211, storeNumber=7005, streamNumber=1, deliveryStreamName=HOUDBAAR, schemaName=BASISSCHEMA, deliveryDateTime=2020-12-02 18:30:00, orderDateTime=2020-12-01 21:00:00, initialPromotionFlag=N, orderStatus=null, totalInitialOrderQuantity=null, totalOrderQuantity=null, boxSize=90010, fillDateTime=2020-12-02 18:30:00, mainDeliveryFlag=J, storeAdviseFlag=N, deliverySchemaType=null, delivererNumber=2, startFillTime=2020-12-02 18:00:00, storeOrder=[{orderNumber=5236352, warehouseNumber=1}], logisticGroupExclusion=[LogisticGroupExclusion(logisticGroupNumber=123)], createdBy=pnl0060s, creationDateTime=2020-11-04 13:05:27, updatedBy=pnl0060s, updateDateTime=2020-11-04 13:05:27, isdeleted=false)]"
         var result = proxyClient.getDeliveryMomentAll(7005, 1, null, "2020-12-02 18:30:00",
         null, null,null,null,null,null,null,null,null,null,null,null,null)

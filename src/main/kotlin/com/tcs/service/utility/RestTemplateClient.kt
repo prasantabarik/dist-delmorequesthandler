@@ -7,6 +7,14 @@ import com.tcs.service.constant.URLPath.GET_REF_DATA
 import com.tcs.service.model.*
 
 import com.tcs.service.proxy.DeliverymomentClientService
+import io.dapr.client.DaprClient
+import io.dapr.client.DaprClientBuilder
+import io.dapr.client.DaprHttp
+import io.dapr.client.domain.HttpExtension
+import io.dapr.client.domain.Response
+import org.json.HTTP
+import org.json.JSONArray
+import org.json.JSONObject
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.*
@@ -25,7 +33,10 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService, pri
 //    lateinit var restTemplate: RestTemplate
 //    private  val basePath = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service"
 //    private val basePath = "http://localhost:3500/v1.0/invoke/deliverymomentcrud.edppublic-deliverymomentcrud-dev/method/api/v1/deliveryMoment-Crud-service"
-
+      
+    val client : DaprClient = DaprClientBuilder().build()
+      val SERVICE_APP_ID = "DeliveryMomentCRUD"
+    
     fun validationForUniqueMoments(params: DeliveryMomentModel): Boolean {
 
         println("result of unique thing")
@@ -90,78 +101,89 @@ class RestTemplateClient(private val delclient: DeliverymomentClientService, pri
 fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         println("inside postform")
 
-    println("inside unique")
-    println(validationForUniqueMoments(params))
-    println("inside order")
-    println(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString()))
-    println("inside delivery")
-    println(checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString()))
-    println("inside startfill")
-    println(checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString()))
-    println("inside order")
-    println(checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString()))
-    println("inside flag check")
-    println(mainDeliveryFlagChecks(params))
+//    println("inside unique")
+//    println(validationForUniqueMoments(params))
+//    println("inside order")
+//    println(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString()))
+//    println("inside delivery")
+//    println(checkDateTime(params.fillDateTime.toString(),params.deliveryDateTime.toString()))
+//    println("inside startfill")
+//    println(checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString()))
+//    println("inside order")
+//    println(checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString()))
+//    println("inside flag check")
+//    println(mainDeliveryFlagChecks(params))
 
 
-
-    if(validationForUniqueMoments(params) && checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
+//    validationForUniqueMoments(params) &&
+    if( checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
             && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
             && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
             && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
             )  {
         println("VALIDATION 1")
 
-        if(params.mainDeliveryFlag == "J" && mainDeliveryFlagChecks(params) == false) {
-            println("VALIDATION 2")
-            return null
-        }
+//        if(params.mainDeliveryFlag == "J" && mainDeliveryFlagChecks(params) == false) {
+//            println("VALIDATION 2")
+//            return null
+//        }
 
-        var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
-        mapParams.put("storeNumber", params.storeNumber.toString());
-        mapParams.put("deliveryStream", params.streamNumber.toString());
-        mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
-        var delivererList = Utility.convertOne(
-                "$GET_REF_DATA/deliveryChannel", DeliveryChannel(), mapParams)
+//        var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
+//        mapParams.put("storeNumber", params.storeNumber.toString());
+//        mapParams.put("deliveryStream", params.streamNumber.toString());
+//        mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
+//        var delivererList = Utility.convertOne(
+//                "$GET_REF_DATA/deliveryChannel", DeliveryChannel(), mapParams)
+//
+//        var warehouseList: List<LogisticChannel>? = Utility.convertTwo(
+//                "$GET_REF_DATA/logisticChannel", LogisticChannel(), mapParams)
+//
+//        var deliveryScheduleList = Utility.convertThree(
+//                "$GET_REF_DATA/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
+//        println("warehouse")
+//        println(warehouseList)
+//        println("deliverer")
+//        println(delivererList)
+//        println("deliveryScheduleList")
+//        println(deliveryScheduleList)
+//        if(warehouseList!=null && delivererList != null
+//                && deliveryScheduleList != null
+//                 ) {
+//            println("nullchecklist")
+//            params.delivererNumber = delivererList[0].delivererNumber
+//            params.deliverySchemaType = deliveryScheduleList[0].deliverySchemaType
+//
+//            params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
+//
+//            ///need to check to generate sequence
+//
+//            params.storeOrder?.add(StoreOrder(orderNumber = Random.nextLong(100000) ,wareHouseNumber = warehouseList?.get(0)?.warehouseNumber))
+//        } else {
+//            return null
+//        }
 
-        var warehouseList: List<LogisticChannel>? = Utility.convertTwo(
-                "$GET_REF_DATA/logisticChannel", LogisticChannel(), mapParams)
-
-        var deliveryScheduleList = Utility.convertThree(
-                "$GET_REF_DATA/deliveryscheduleformoment",DeliveryScheduleModel(),mapParams)
-        println("warehouse")
-        println(warehouseList)
-        println("deliverer")
-        println(delivererList)
-        println("deliveryScheduleList")
-        println(deliveryScheduleList)
-        if(warehouseList!=null && delivererList != null
-                && deliveryScheduleList != null
-                 ) {
-            println("nullchecklist")
-            params.delivererNumber = delivererList[0].delivererNumber
-            params.deliverySchemaType = deliveryScheduleList[0].deliverySchemaType
-
-            params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
-
-            ///need to check to generate sequence
-
-            params.storeOrder?.add(StoreOrder(orderNumber = Random.nextLong(100000) ,wareHouseNumber = warehouseList?.get(0)?.warehouseNumber))
-        } else {
-            return null
-        }
-//        val url = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model"
-//       val url =  "http://localhost:3500/v1.0/invoke/deliverymomentcrud.edppublic-deliverymomentcrud-dev/method/api/v1/deliveryMoment-Crud-service/model"
-        val httpHeaders = HttpHeaders()
-       httpHeaders.contentType = MediaType.APPLICATION_JSON
+//        val httpHeaders = HttpHeaders()
+//       httpHeaders.contentType = MediaType.APPLICATION_JSON
 //       val requestParams = LinkedMultiValueMap<String, String>()
 
-       val httpEntity = HttpEntity<DeliveryMomentModel>(params, httpHeaders)
-
+//       val httpEntity = HttpEntity<DeliveryMomentModel>(params, httpHeaders)
         println("it comes to hit crud")
-        val response: ResponseEntity<ServiceResponse> = restTemplate.exchange(DEL_MOMENT_CRUD + GET_ALL_URI, HttpMethod.POST, httpEntity, ServiceResponse::class.java)
+        println(params)
 
-       return response
+
+        println("RES2")
+        val response = client.invokeService(SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI, params,
+                HttpExtension.POST, mapOf(Pair("Content-Type", "application/json")), JSONArray::class.java).block()
+        println("IT CAME HERE BEFORE")
+        println(response.toString())
+        println("IT CAME HERE")
+
+
+//        val response: ResponseEntity<ServiceResponse> = restTemplate.exchange(DEL_MOMENT_CRUD + GET_ALL_URI, HttpMethod.POST, httpEntity, ServiceResponse::class.java)
+
+      return ResponseEntity.ok(ServiceResponse("200",
+              "Success", response))
+//        return  response as ResponseEntity<ServiceResponse>?
 
     } else {
         return null
@@ -172,20 +194,20 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
 
     fun putForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
-        println("inside putform")
-
-        println("inside unique")
-        println(validationForUniqueMoments(params))
-        println("inside order")
-        println(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString()))
-        println("inside delivery")
-        println(checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString()))
-        println("inside startfill")
-        println(checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString()))
-        println("inside order")
-        println(checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString()))
-        println("inside flag check")
-        println(mainDeliveryFlagChecks(params))
+//        println("inside putform")
+//
+//        println("inside unique")
+//        println(validationForUniqueMoments(params))
+//        println("inside order")
+//        println(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString()))
+//        println("inside delivery")
+//        println(checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString()))
+//        println("inside startfill")
+//        println(checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString()))
+//        println("inside order")
+//        println(checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString()))
+//        println("inside flag check")
+////        println(mainDeliveryFlagChecks(params))
 
 
 
@@ -195,40 +217,49 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
                 && checkDateTime(params.orderDateTime.toString(),params.startFillTime.toString())
         ) {
 
-             println("It is trying to update")
-            var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
-            mapParams.put("storeNumber", params.storeNumber.toString());
-            mapParams.put("deliveryStream", params.streamNumber.toString());
-            mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
-            var delivererList = Utility.convertOne(
-                    "$GET_REF_DATA/deliveryChannel", DeliveryChannel(), mapParams)
+//             println("It is trying to update")
+//            var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
+//            mapParams.put("storeNumber", params.storeNumber.toString());
+//            mapParams.put("deliveryStream", params.streamNumber.toString());
+//            mapParams.put("startDate", params.deliveryDateTime.toString().split(" ")[0]);
+//            var delivererList = Utility.convertOne(
+//                    "$GET_REF_DATA/deliveryChannel", DeliveryChannel(), mapParams)
+//
+//            var warehouseList: List<LogisticChannel>? = Utility.convertTwo(
+//                    "$GET_REF_DATA/logisticChannel", LogisticChannel(), mapParams)
+//
+//            if(warehouseList!=null && delivererList != null
+//            ) {
+//                println("nullchecklist")
+//                params.delivererNumber = delivererList[0].delivererNumber
+//
+//                params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
+//
+//                ///need to check to generate sequence
+//
+//               } else {
+//                return null
+//            }
 
-            var warehouseList: List<LogisticChannel>? = Utility.convertTwo(
-                    "$GET_REF_DATA/logisticChannel", LogisticChannel(), mapParams)
+//            val httpHeaders = HttpHeaders()
+//            httpHeaders.contentType = MediaType.APPLICATION_JSON
+//            val requestParams = LinkedMultiValueMap<String, String>()
 
-            if(warehouseList!=null && delivererList != null
-            ) {
-                println("nullchecklist")
-                params.delivererNumber = delivererList[0].delivererNumber
+//            val httpEntity = HttpEntity<DeliveryMomentModel>(params, httpHeaders)
 
-                params.id = params.storeNumber.toString() + params.deliveryDateTime + params.streamNumber
+            val response = client.invokeService(SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI, params,
+                    HttpExtension.POST, mapOf(Pair("Content-Type", "application/json")), JSONArray::class.java).block()
+            println("IT CAME HERE BEFORE")
+            println(response.toString())
+            println("IT CAME HERE")
 
-                ///need to check to generate sequence
 
-               } else {
-                return null
-            }
-//          val url = "http://deliverymomentcrud-edppublic-deliverymomentcrud-dev.59ae6b648ca3437aae3a.westeurope.aksapp.io/api/v1/deliveryMoment-Crud-service/model"
-//          val url =  "http://localhost:3500/v1.0/invoke/deliverymomentcrud.edppublic-deliverymomentcrud-dev/method/api/v1/deliveryMoment-Crud-service/model"
-            val httpHeaders = HttpHeaders()
-            httpHeaders.contentType = MediaType.APPLICATION_JSON
-            val requestParams = LinkedMultiValueMap<String, String>()
+            return ResponseEntity.ok(ServiceResponse("200",
+                    "Success", response))
 
-            val httpEntity = HttpEntity<DeliveryMomentModel>(params, httpHeaders)
+//            val response: ResponseEntity<ServiceResponse> = restTemplate.exchange(DEL_MOMENT_CRUD + GET_ALL_URI, HttpMethod.POST, httpEntity, ServiceResponse::class.java)
 
-            val response: ResponseEntity<ServiceResponse> = restTemplate.exchange(DEL_MOMENT_CRUD + GET_ALL_URI, HttpMethod.POST, httpEntity, ServiceResponse::class.java)
-
-            return response
+//            return response
 
         } else {
             return null
@@ -244,8 +275,14 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         var parametermap:MutableMap<String, String> = mutableMapOf<String, String>()
 
         parametermap.put("id" ,id)
+
+        println(id)
+        
         println("Call delete function")
-        restTemplate.delete(DEL_MOMENT_CRUD + GET_BY_ID_URI, parametermap);
+        client.invokeService(SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI + "/$id",
+                HttpExtension.DELETE, mapOf(Pair("Content-Type", "application/json")), JSONArray::class.java).block()
+        
+//        restTemplate.delete(DEL_MOMENT_CRUD + GET_BY_ID_URI, parametermap);
         println("Call complete")
 
     }

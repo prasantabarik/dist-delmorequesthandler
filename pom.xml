@@ -30,9 +30,34 @@
             <id>jcenter</id>
             <url>https://jcenter.bintray.com/</url>
         </repository>
+        <!-- BEGIN: Dapr's repositories -->
+        <repository>
+            <id>oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>oss-release</id>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+        <!-- END: Dapr's repositories -->
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>io.dapr</groupId>
+            <artifactId>dapr-sdk</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dapr</groupId>
+            <artifactId>dapr-sdk-actors</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.dapr</groupId>
+            <artifactId>dapr-sdk-springboot</artifactId>
+            <version>0.10.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

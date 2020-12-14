@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.isEqualTo
+import reactor.core.publisher.Mono
 
 
 @Service
@@ -100,7 +101,7 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
                                       orderDateFrom:String?, orderDateTo:String?, fillDateFrom:String?,
                                       fillDateTo:String?, startFillTimeFrom:String?, startFillTimeTo:String?,
                                       logisticGroupNumber:Int?, mainDeliveryFlag: String?)
-            : List<DeliveryMomentModel>? {
+            : Any? {
         var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
 
 //        if(storeNumber == null && StreamNumber == null &&
@@ -119,8 +120,11 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
                   fillDateFrom, fillDateTo,
                   startFillTimeFrom, startFillTimeTo,logisticGroupNumber, mainDeliveryFlag)
 
-        return Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
+
+//        return Utility.convert("$DEL_MOMENT_CRUD/model", DeliveryMomentModel(), mapParams)
+          return Utility.invokeFromDapr(mapParams, DeliveryMomentModel())
     }
+
 //    companion object {
 //
 //        fun convertList(jsonObject: JSONObject): List<DeliveryMomentModel> {

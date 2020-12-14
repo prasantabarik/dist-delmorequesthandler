@@ -1,7 +1,7 @@
 package com.tcs.service.model
 
 data class LogisticGroupExclusion(
-        var logisticGroupNumber:Long?
+        var logisticGroupNumber:Long? = null
 ) {
 
 }

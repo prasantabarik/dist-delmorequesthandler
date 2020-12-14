@@ -12,7 +12,7 @@ class PTSimulationTemplate extends Simulation {
   @Value("${service.perf-urls.get-model-url}")
   val getModelurl: String = ""
 
-  val scn = scenario("Template Check").repeat(100, "n") {
+  val scn = scenario("Template Check").repeat(1, "n") {
     exec(
       http("GetModel-API")
         .get("http://localhost:8097/api/v1/service-template/model/1")

@@ -72,16 +72,16 @@ class ControllerTest: BaseTest() {
      * Test Method  for Controller Get Endpoint
      * Service call is mocked
      **/
-    @Test
-    fun `should respond data using id`() {
-        var expected = File(SAMPLE_RESPONSE_JSON_PATH).readText(Charsets.UTF_8)
-        var result: MvcResult =
-                mockMvc.get(BASE_URI + GET_BY_ID_URI, dataId)
-                {
-                    contentType = MediaType.APPLICATION_JSON
-                }.andExpect { status { isOk } }.andReturn()
-        JSONAssert.assertEquals(expected, result.response.contentAsString, false)
-    }
+//    @Test
+//    fun `should respond data using id`() {
+//        var expected = File(SAMPLE_RESPONSE_JSON_PATH).readText(Charsets.UTF_8)
+//        var result: MvcResult =
+//                mockMvc.get(BASE_URI + GET_BY_ID_URI, dataId)
+//                {
+//                    contentType = MediaType.APPLICATION_JSON
+//                }.andExpect { status { isOk } }.andReturn()
+//        JSONAssert.assertEquals(expected, result.response.contentAsString, false)
+//    }
 
     @Test
     fun `get function`(){

@@ -122,7 +122,12 @@ class Controller(private val service: Service, private val proxyService: Deliver
     )
     @RequestMapping(value = [POST_PUT_DELETE_URI], method = [RequestMethod.POST], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun post(@RequestBody model: DeliveryMomentModel): ResponseEntity<ServiceResponse> {
-        val  response= restService.postForm(model)
+        println(model)
+
+        val  response = restService.postForm(model)
+        println("RESPONSE")
+        println(response)
+
         return if (response == null) {
             ResponseEntity.ok(ServiceResponse("400",
                     "Failure", "Delivery Moment already exists for this period"))
