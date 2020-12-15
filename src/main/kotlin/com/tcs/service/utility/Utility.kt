@@ -12,18 +12,7 @@ import io.dapr.client.domain.HttpExtension
 
 object Utility {
 
-    fun invokeFromDapr(params: MutableMap<String, String>): MutableList<DeliveryMomentModel>? {
 
-
-        val client : DaprClient = DaprClientBuilder().build()
-        val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, params)
-
-        val res1 = client.invokeService(SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI,
-                httpExtension, mapOf(Pair("Content-Type", "application/json")), Array<DeliveryMomentModel>::class.java).block()?.toMutableList()
-
-        return res1
-
-        }
 
 
 }

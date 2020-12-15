@@ -1,19 +1,17 @@
 package com.tcs.service.proxy
 
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+
+import com.tcs.service.constant.URLPath
 import com.tcs.service.constant.URLPath.DEL_MOMENT_CRUD
 import com.tcs.service.model.DeliveryMomentModel
 import com.tcs.service.utility.Utility
-import org.apache.logging.log4j.kotlin.logger
-import org.json.JSONObject
+import io.dapr.client.DaprClient
+import io.dapr.client.DaprClientBuilder
+import io.dapr.client.DaprHttp
+import io.dapr.client.domain.HttpExtension
 import org.springframework.stereotype.Service
 import java.util.*
-import org.springframework.data.mongodb.core.query.Criteria
-import org.springframework.data.mongodb.core.query.isEqualTo
-import reactor.core.publisher.Mono
+
 
 
 @Service
@@ -106,25 +104,17 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
                   fillDateFrom, fillDateTo,
                   startFillTimeFrom, startFillTimeTo,logisticGroupNumber, mainDeliveryFlag)
 
+        val client : DaprClient = DaprClientBuilder().build()
+        val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
 
-          return Utility.invokeFromDapr(mapParams)
+        val res1 = client.invokeService(URLPath.SERVICE_APP_ID, DEL_MOMENT_CRUD + URLPath.GET_ALL_URI,
+                httpExtension, mapOf(Pair("Content-Type", "application/json")), Array<DeliveryMomentModel>::class.java).block()?.toMutableList()
+
+        return res1
+
+
     }
 
-//    companion object {
-//
-//        fun convertList(jsonObject: JSONObject): List<DeliveryMomentModel> {
-//            return when {
-//                jsonObject.has("response") -> {
-//                    val mapper = ObjectMapper().registerKotlinModule()
-//                    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-//                    mapper.readValue<List<DeliveryMomentModel>>(jsonObject["response"].toString(),
-//                            object : TypeReference<List<DeliveryMomentModel>>() {})
-//                }
-//                else -> {
-//                    listOf()
-//                }
-//            }
-//        }
-//    }
+
 
 }
