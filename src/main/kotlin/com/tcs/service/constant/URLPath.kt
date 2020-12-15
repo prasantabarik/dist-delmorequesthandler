@@ -17,7 +17,13 @@ object URLPath {
 //    const val GET_REF_DATA = "http://localhost:3500/v1.0/invoke/getrefdata.edppublic-getrefdata-dev/method/api/v1/getReferenceData"
 //    const val DEL_MOMENT_CRUD = "http://localhost:3500/v1.0/invoke/DeliveryMomentCRUD/method/api/v1/deliveryMoment-Crud-service"
 //    const val GET_REF_DATA = "http://localhost:8082/api/v1/getReferenceData"
-      const val DEL_MOMENT_CRUD = "api/v1/deliveryMoment-Crud-service"
-    const val GET_REF_DATA = "http://localhost:8082/api/v1/getReferenceData"
+      const val DEL_MOMENT_CRUD = "api/v1/deliverymomentcrud"
+    const val GET_REF_DATA = "api/v1/getrefdata"
+    const val SERVICE_APP_ID = "deliverymomentcrud"
+    const val SERVICE_APP_ID1 = "getrefdata"
+    const val DEL_CHANNEL = "/deliveryChannel"
+    const val LOG_CHANNEL = "/logisticChannel"
+    const val DEL_SCHEDULE = "/deliveryscheduleformoment"
+
 
 }
