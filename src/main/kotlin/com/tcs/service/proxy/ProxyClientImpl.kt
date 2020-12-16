@@ -3,8 +3,8 @@ package com.tcs.service.proxy
 
 import com.tcs.service.constant.URLPath
 import com.tcs.service.constant.URLPath.DEL_MOMENT_CRUD
+import com.tcs.service.constant.URLPath.GET_ALL_URI
 import com.tcs.service.model.DeliveryMomentModel
-import com.tcs.service.utility.Utility
 import io.dapr.client.DaprClient
 import io.dapr.client.DaprClientBuilder
 import io.dapr.client.DaprHttp
@@ -18,7 +18,7 @@ import java.util.*
 class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
 
     override fun validateForParams(storeNumber: Long?, streamNumber: Int?, schemaName: String?, deliveryDateTime: String?, orderDateTime: String?, fillDateTime: String?, startFillTime: String?, deliveryDateFrom: String?, deliveryDateTo: String?, orderDateFrom: String?, orderDateTo: String?, fillDateFrom: String?, fillDateTo: String?, startFillTimeFrom: String?, startFillTimeTo: String?, logisticGroupNumber: Int?, mainDeliveryFlag: String?): MutableMap<String, String> {
-        var mapParams: MutableMap<String, String> = mutableMapOf<String, String>()
+        val mapParams: MutableMap<String, String> = mutableMapOf()
 
 
         if(storeNumber == null && streamNumber == null &&
@@ -26,64 +26,64 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
                 && startFillTime == null && startFillTimeFrom == null && startFillTimeTo == null && orderDateTime == null && orderDateFrom == null && orderDateTo == null
                 && logisticGroupNumber== null && fillDateTime == null && fillDateFrom == null && fillDateTo == null
                 && mainDeliveryFlag == null){
-            println("Inside IF")
+
             return mapParams
         }
         if( storeNumber != null) {
-            mapParams.put("storeNumber", storeNumber.toString());
+            mapParams["storeNumber"] = storeNumber.toString()
         }
 
         if( streamNumber != null) {
-            mapParams.put("streamNumber", streamNumber.toString());
+            mapParams["streamNumber"] = streamNumber.toString()
         }
 
         if( schemaName != null) {
-            mapParams.put("schemaName", schemaName);
+            mapParams["schemaName"] = schemaName
         }
         if( deliveryDateTime != null) {
-            mapParams.put("deliveryDateTime", deliveryDateTime);
+            mapParams["deliveryDateTime"] = deliveryDateTime
         }
         if( deliveryDateFrom != null) {
-            mapParams.put("deliveryDateFrom", deliveryDateFrom);
+            mapParams["deliveryDateFrom"] = deliveryDateFrom
         }
         if( deliveryDateTo != null) {
-            mapParams.put("deliveryDateTo", deliveryDateTo);
+            mapParams["deliveryDateTo"] = deliveryDateTo
         }
 
         if( orderDateTime != null) {
-            mapParams.put("orderDateTime", orderDateTime);
+            mapParams["orderDateTime"] = orderDateTime
         }
         if( orderDateFrom != null) {
-            mapParams.put("orderDateFrom", orderDateFrom);
+            mapParams["orderDateFrom"] = orderDateFrom
         }
         if( orderDateTo != null) {
-            mapParams.put("orderDateTo", orderDateTo);
+            mapParams["orderDateTo"] = orderDateTo
         }
 
         if( fillDateTime != null) {
-            mapParams.put("fillDateTime", fillDateTime);
+            mapParams["fillDateTime"] = fillDateTime
         }
         if( fillDateFrom != null) {
-            mapParams.put("fillDateFrom", fillDateFrom);
+            mapParams["fillDateFrom"] = fillDateFrom
         }
         if( fillDateTo != null) {
-            mapParams.put("fillDateTo", fillDateTo);
+            mapParams["fillDateTo"] = fillDateTo
         }
 
         if( startFillTime != null) {
-            mapParams.put("startFillTime", startFillTime);
+            mapParams["startFillTime"] = startFillTime
         }
         if( startFillTimeFrom != null) {
-            mapParams.put("startFillTimeFrom", startFillTimeFrom);
+            mapParams["startFillTimeFrom"] = startFillTimeFrom
         }
         if( startFillTimeTo != null) {
-            mapParams.put("startFillTimeTo", startFillTimeTo);
+            mapParams["startFillTimeTo"] = startFillTimeTo
         }
         if(logisticGroupNumber != null){
-            mapParams.put("logisticGroupNumber", logisticGroupNumber.toString());
+            mapParams["logisticGroupNumber"] = logisticGroupNumber.toString()
         }
         if(mainDeliveryFlag != null){
-            mapParams.put("mainDeliveryFlag", mainDeliveryFlag.toString());
+            mapParams["mainDeliveryFlag"] = mainDeliveryFlag.toString()
         }
         return mapParams
     }
@@ -107,10 +107,10 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
         val client : DaprClient = DaprClientBuilder().build()
         val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
 
-        val res1 = client.invokeService(URLPath.SERVICE_APP_ID, DEL_MOMENT_CRUD + URLPath.GET_ALL_URI,
-                httpExtension, mapOf(Pair("Content-Type", "application/json")), Array<DeliveryMomentModel>::class.java).block()?.toMutableList()
+        val res1 = client.invokeService(URLPath.SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI,
+                httpExtension, mapOf(Pair("Content-Type", "application/json")), Array<DeliveryMomentModel>::class.java).block()
 
-        return res1
+        return res1?.toMutableList()
 
 
     }

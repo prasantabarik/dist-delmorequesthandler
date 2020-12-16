@@ -2,10 +2,9 @@ package com.tcs.service.model
 
 import org.jetbrains.annotations.NotNull
 import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
-import javax.validation.constraints.Size
+
 
 
 data class DeliveryMomentModel(

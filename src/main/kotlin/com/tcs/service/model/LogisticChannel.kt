@@ -7,6 +7,4 @@ data class LogisticChannel(
         val deliveryStream: Int?=0,
         val warehouseNumber: Int?=0,
         val endDate: String?=""
-) {
-
-}
+)

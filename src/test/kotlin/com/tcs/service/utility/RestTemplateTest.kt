@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 
 class RestTemplateTest {
 
-    var restTemplateClient: RestTemplateClient = RestTemplateClient(DeliverymomentClientService(), RestTemplate())
+    var restTemplateClient: RestTemplateClient = RestTemplateClient()
     var params: DeliveryMomentModel = DeliveryMomentModel()
 
     @Test
