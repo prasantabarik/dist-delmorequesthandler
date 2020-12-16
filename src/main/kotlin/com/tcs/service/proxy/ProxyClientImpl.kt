@@ -18,7 +18,7 @@ import java.util.*
 class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
 
     override fun validateForParams(storeNumber: Long?, streamNumber: Int?, schemaName: String?, deliveryDateTime: String?, orderDateTime: String?, fillDateTime: String?, startFillTime: String?, deliveryDateFrom: String?, deliveryDateTo: String?, orderDateFrom: String?, orderDateTo: String?, fillDateFrom: String?, fillDateTo: String?, startFillTimeFrom: String?, startFillTimeTo: String?, logisticGroupNumber: Int?, mainDeliveryFlag: String?): MutableMap<String, String> {
-        val mapParams: MutableMap<String, String> = mutableMapOf()
+      val mapParams: MutableMap<String, String> = mutableMapOf()
 
 
         if(storeNumber == null && streamNumber == null &&
@@ -29,6 +29,8 @@ class DeliverymomentClientService : DeliveryMoment<DeliveryMomentModel> {
 
             return mapParams
         }
+
+
         if( storeNumber != null) {
             mapParams["storeNumber"] = storeNumber.toString()
         }

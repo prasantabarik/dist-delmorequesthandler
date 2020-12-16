@@ -33,11 +33,9 @@ class RestTemplateClient {
 
         val mapParams: MutableMap<String, String> = mutableMapOf()
 
-        mapParams["storeNumber"] = params.storeNumber.toString()
-        mapParams["streamNumber"] = params.streamNumber.toString()
-        mapParams["deliveryDateTime"] = params.deliveryDateTime.toString()
-        mapParams["orderDateTime"] = params.orderDateTime.toString()
-        mapParams["fillDateTime"] = params.fillDateTime.toString()
+        mapParams.putAll(setOf("storeNumber" to params.storeNumber.toString(),"streamNumber" to params.streamNumber.toString(),
+                "deliveryDateTime" to params.deliveryDateTime.toString(), "orderDateTime" to params.orderDateTime.toString(),
+                "fillDateTime" to params.fillDateTime.toString() ))
 
         val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
         val uniqueCheckList = client.invokeService(SERVICE_APP_ID, "$DEL_MOMENT_CRUD/deliverymomentunique", params,
@@ -64,26 +62,27 @@ class RestTemplateClient {
         val dateComp1 = dateList1[0].format(DateTimeFormatter.ISO_DATE)
         val dateComp2 = dateList2[0].format(DateTimeFormatter.ISO_DATE)
 
-        return if(dateComp1 < dateComp2) {
-            true
-        } else if(dateComp1 == dateComp2){
-            val timeComp1 = dateList1[1].format(DateTimeFormatter.ISO_TIME)
-            val timeComp2 = dateList2[1].format(DateTimeFormatter.ISO_TIME)
+    return    when {
+            dateComp1 < dateComp2 -> true
+            dateComp1 == dateComp2 -> {
+                val timeComp1 = dateList1[1].format(DateTimeFormatter.ISO_TIME)
+                val timeComp2 = dateList2[1].format(DateTimeFormatter.ISO_TIME)
 
-            (timeComp1 <= timeComp2)
+                (timeComp1 <= timeComp2)
+            }
 
-        } else {
-            false
+            else -> {
+                println("so it basically did it")
+              false
+            }
+
         }
     }
+
     fun mainDeliveryFlagChecks(params: DeliveryMomentModel): Boolean? {
         val mapParams: MutableMap<String, String> = mutableMapOf()
-        mapParams["storeNumber"] = params.storeNumber.toString()
-        mapParams["streamNumber"] = params.streamNumber.toString()
-        mapParams["deliveryDateFrom"] = params.deliveryDateTime.toString().split(" ")[0]
-        mapParams["deliveryDateTo"] = LocalDate.parse(params.deliveryDateTime.toString().split(" ")[0], DateTimeFormatter.ISO_DATE).plusDays(1).toString()
-
-        mapParams["mainDeliveryFlag"] = "J"
+        mapParams.putAll(setOf("storeNumber" to params.storeNumber.toString(),"streamNumber" to params.streamNumber.toString(),"deliveryDateFrom" to params.deliveryDateTime.toString().split(" ")[0],
+                "deliveryDateTo" to LocalDate.parse(params.deliveryDateTime.toString().split(" ")[0], DateTimeFormatter.ISO_DATE).plusDays(1).toString(),"mainDeliveryFlag" to "J"))
 
         val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
         val uniqueCheckList = client.invokeService(SERVICE_APP_ID, DEL_MOMENT_CRUD + GET_ALL_URI, params,
@@ -110,9 +109,9 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         }
 
         val mapParams: MutableMap<String, String> = mutableMapOf()
-        mapParams["storeNumber"] = params.storeNumber.toString()
-        mapParams["deliveryStream"] = params.streamNumber.toString()
-        mapParams["startDate"] = params.deliveryDateTime.toString().split(" ")[0]
+
+        mapParams.putAll(setOf("storeNumber" to params.storeNumber.toString(),"deliveryStream" to params.streamNumber.toString(),
+                "startDate" to params.deliveryDateTime.toString().split(" ")[0]))
 
         val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
 
@@ -164,10 +163,6 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
     fun putForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
 
-
-
-
-
         if(checkDateTime(params.orderDateTime.toString(), params.deliveryDateTime.toString())
                 && checkDateTime(params.deliveryDateTime.toString(),params.fillDateTime.toString())
                 && checkDateTime(params.startFillTime.toString(),params.deliveryDateTime.toString())
@@ -175,9 +170,9 @@ fun postForm(params: DeliveryMomentModel) : ResponseEntity<ServiceResponse>? {
         ) {
 
             val mapParams: MutableMap<String, String> = mutableMapOf()
-            mapParams["storeNumber"] = params.storeNumber.toString()
-            mapParams["deliveryStream"] = params.streamNumber.toString()
-            mapParams["startDate"] = params.deliveryDateTime.toString().split(" ")[0]
+
+            mapParams.putAll(setOf("storeNumber" to params.storeNumber.toString(),"deliveryStream" to params.streamNumber.toString(),
+                    "startDate" to params.deliveryDateTime.toString().split(" ")[0]))
 
             val httpExtension = HttpExtension(DaprHttp.HttpMethods.GET, mapParams)
 
